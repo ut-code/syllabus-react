@@ -20,10 +20,10 @@ export function Timetable():JSX.Element{
             <Grid columns={5.5} style={{padding:"7px 6px 7px 6px"}} >
 
                 {/* 右上の空欄 */}
-                <SlotElement slotKey={"blank-slot"} height={30} span={"auto"}/>
+                <SlotElement key={"blank-slot"} height={30} span={"auto"}/>
 
                 {/* 曜日 */}
-                {weekdays.map(x=><SlotElement slotKey={x} height={30} span={1}>{x}</SlotElement>)}
+                {weekdays.map(x=><SlotElement key={x} height={30} span={1}>{x}</SlotElement>)}
 
             </Grid>
 
@@ -34,10 +34,10 @@ export function Timetable():JSX.Element{
             <Grid columns={5.5} style={{padding:"7px 6px 7px 6px"}} >
 
                 {/* 「集中」のラベル */}
-                <SlotElement slotKey={"intensive-lec-label"} height={100} span={"auto"}>集中</SlotElement>
+                <SlotElement key={"intensive-lec-label"} height={100} span={"auto"}>集中</SlotElement>
 
                 {/* 登録された集中講義のスロット */}
-                <SlotElement slotKey={"intensive-lec-slot"} height={100} span={5}>class name</SlotElement>
+                <SlotElement key={"intensive-lec-slot"} height={100} span={5}>class name</SlotElement>
             </Grid>
 
         </div>
@@ -53,10 +53,10 @@ function PeriodElement({n}:{n:number}){
         <Grid key={"grid"+n} columns={5.5} style={{padding:"7px 6px 7px 6px"}}>
 
             {/* 時限のラベル */}
-            <SlotElement slotKey={"slot"+n.toString()} height={100} span={"auto"}>{n}</SlotElement>
+            <SlotElement key={"slot"+n.toString()} height={100} span={"auto"}>{n}</SlotElement>
 
             {/* 講義を表示するスロット */}
-            {weekdays.map(x=><SlotElement slotKey={x+n} height={100} span={1}>class name</SlotElement>)}
+            {weekdays.map(x=><SlotElement key={x+n} height={100} span={1}>class name</SlotElement>)}
         </Grid>
     )
 }
@@ -65,5 +65,5 @@ function PeriodElement({n}:{n:number}){
  * 講義を表示するスロット
  * [key:ループで生成する際のkey, height:要素の高さ, span:Gridのspan]
  */
-const SlotElement=({children, slotKey,height,span}:{children?:ReactNode,slotKey:string, height:number,span:StyleProp<number | 'auto' | 'content'> })=>
-    <Grid.Col key={slotKey} span={span} style={{height:height, borderColor:"gray", borderWidth:"1px", borderStyle:"solid", alignItems:"center", display:"flex", justifyContent:"center", minWidth:10}}>{children}</Grid.Col>
+const SlotElement=({children,height,span}:{children?:ReactNode, height:number,span:StyleProp<number | 'auto' | 'content'> })=>
+    <Grid.Col span={span} style={{height:height, borderColor:"gray", borderWidth:"1px", borderStyle:"solid", alignItems:"center", display:"flex", justifyContent:"center", minWidth:10}}>{children}</Grid.Col>
